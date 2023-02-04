@@ -339,7 +339,7 @@ include("navBar.php"); ?>
 										<td><?php echo ($teamData[5]); ?></td>
 									</tr>
 									<tr class="info">
-										<td>Have a Climber</td>
+										<td>Auto Paths</td>
 										<td><?php echo ($teamData[6]); ?></td>
 									</tr>
 

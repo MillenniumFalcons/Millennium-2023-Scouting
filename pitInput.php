@@ -91,7 +91,7 @@ function filter($str){
 				</div>
 
 				<div class="col-lg-2">
-				<b><br>Have a Climber? </b>
+				<b><br>Auto Paths? </b>
 				</div>
 				<div class="col-lg-10">
 				<input type="text" class="form-control" id="climbHelp" name="climbHelp" placeholder=" ">
