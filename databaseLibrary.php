@@ -96,7 +96,6 @@ function createTables()
 	global $dbname;
 	global $pitScoutTable;
 	global $matchScoutTable;
-	global $headScoutTable;
 	$conn = connectToDB();
 	$query = "CREATE TABLE " . $dbname . "." . $pitScoutTable . " (
 			teamNumber VARCHAR(50) NOT NULL PRIMARY KEY,
@@ -145,32 +144,8 @@ function createTables()
 	if (!$statement->execute()) {
 		throw new Exception("constructDatabase Error: CREATE TABLE matchScoutTable query failed.");
 	}
-	$query = "CREATE TABLE " . $dbname . "." . $headScoutTable . " (
-			matchNum INT(11) NOT NULL PRIMARY KEY,
-			team1 INT(11) NOT NULL,
-			team2 INT(11) NOT NULL,
-			team3 INT(11) NOT NULL,
-			team4 INT(11) NOT NULL,
-			team5 INT(11) NOT NULL,
-			team6 INT(11) NOT NULL
-		)";
-	$statement = $conn->prepare($query);
-	if (!$statement->execute()) {
-		throw new Exception("constructDatabase Error: CREATE TABLE pitScoutTable query failed.");
-	}
-}
-//Input- pitScoutInput, Data from pit scout form is assigned to columns in 17template_pitscout.
-//Output- queryString and "Success" statement, data put in columns.
-function pitScoutInput($teamNumber, $teamName, $numBatteries, $chargedBatteries, $codeLanguage, $pitComments, $climbHelp)
-{
-	global $pitScoutTable;
-	$queryString = "REPLACE INTO `" . $pitScoutTable . "` (`teamNumber`, `teamName`, `numBatteries`,`chargedBatteries`, `codeLanguage`, `pitComments`, `climbHelp`)";
-	$queryString = $queryString . ' VALUES ("' . $teamNumber . '", "' . $teamName . '", "' . $numBatteries . '", "' . $chargedBatteries . '", "' . $codeLanguage . '", "' . $pitComments . '", "' . $climbHelp . '")';
-	$queryOutput = runQuery($queryString);
 }
 
-//Input- getTeamList, accesses match scout table and gets team numbers from it.
-//Output- array, list of teams in teamNumber column of pitscout table.
 function getTeamList()
 {
 	global $matchScoutTable;
@@ -197,6 +172,14 @@ function getUpperGoalTeamList()
 		}
 	}
 	return ($teams);
+}
+
+function pitScoutInput($teamNumber, $teamName, $numBatteries, $chargedBatteries, $codeLanguage, $pitComments, $climbHelp)
+{
+	global $pitScoutTable;
+	$queryString = "REPLACE INTO `" . $pitScoutTable . "` (`teamNumber`, `teamName`, `numBatteries`,`chargedBatteries`, `codeLanguage`, `pitComments`, `climbHelp`)";
+	$queryString = $queryString . ' VALUES ("' . $teamNumber . '", "' . $teamName . '", "' . $numBatteries . '", "' . $chargedBatteries . '", "' . $codeLanguage . '", "' . $pitComments . '", "' . $climbHelp . '")';
+	$queryOutput = runQuery($queryString);
 }
 
 function matchInput(
@@ -293,38 +276,7 @@ function matchInput(
 															 "' . $cycleNumber . '")';
 	$queryOutput = runQuery($queryString);
 }
-function headScoutInput(
-	$matchNum,
-	$team1,
-	$team2,
-	$team3,
-	$team4,
-	$team5,
-	$team6
-) {
-	global $servername;
-	global $username;
-	global $password;
-	global $dbname;
-	global $headScoutTable;
-	$queryString = "REPLACE INTO `" . $headScoutTable . '`(  `matchNum`,
-															`team1`,
-															`team2`,
-															`team3`,
-															`team4`,
-															`team5`,
-															`team6`)
-															VALUES
-															("' . $matchNum . '",
-															"' . $team1 . '",
-															"' . $team2 . '",
-															"' . $team3 . '",
-															"' . $team4 . '",
-															"' . $team5 . '",
-															"' . $team6 . '")';
-	error_log($queryString);
-	$queryOutput = runQuery($queryString);
-}
+
 function getTeamData($teamNumber)
 {
 	global $servername;
@@ -333,13 +285,10 @@ function getTeamData($teamNumber)
 	global $dbname;
 	global $pitScoutTable;
 	global $matchScoutTable;
-	global $headScoutTable;
 	$qs1 = "SELECT * FROM `" . $pitScoutTable . "` WHERE teamNumber = " . $teamNumber . "";
 	$qs2 = "SELECT * FROM `" . $matchScoutTable . "`  WHERE teamNum = " . $teamNumber . "";
-	$qs3 = "SELECT * FROM `" . $headScoutTable . "`";
 	$result = runQuery($qs1);
 	$result2 = runQuery($qs2);
-	$result3 = runQuery($qs3);
 	$teamData = array();
 	$pitExists = False;
 	if ($result != FALSE) {
@@ -364,14 +313,6 @@ function getTeamData($teamNumber)
 				$row["climbTwo"], $row["climbThree"], $row["climbCenter"],
 				$row["climbSide"], $row["issues"], $row["defenseBot"],
 				$row["defenseComments"], $row["matchComments"], $row["penalties"], $row["cycleNumber"]
-			));
-		}
-	}
-	if ($result3 != FALSE) {
-		foreach ($result3 as $row_key => $row) {
-			array_push($teamData[7], array(
-				$row["matchNum"], $row["team1"], $row["team2"],
-				$row["team3"], $row["team4"], $row["team5"], $row["team6"]
 			));
 		}
 	}
@@ -792,12 +733,6 @@ function getAllMatchData()
 	$qs1 = "SELECT * FROM `" . $matchScoutTable . "`";
 	return runQuery($qs1);
 }
-function getAllHeadScoutData()
-{
-	global $headScoutTable;
-	$qs1 = "SELECT * FROM `" . $headScoutTable . "`";
-	return runQuery($qs1);
-}
 
 function getTotalClimb($teamNumber)
 {
@@ -888,43 +823,6 @@ function getTotalClimbCenter($teamNumber)
 	}
 	return ($climbCount);
 }
-
-
-function getAvgDriveRank($teamNumber)
-{
-	$result = getAllHeadScoutData();
-	$driveRankSum = 0;
-	$matchCount = 0;
-	foreach ($result as $row_key => $row) {
-		foreach ($row as $key => $value) {
-			$num = $key;
-			if ($value == $teamNumber) {
-				$matchCount++;
-				if ($key == "team1") {
-					$driveRankSum += 1;
-				} else if ($key == "team2") {
-					$driveRankSum += 2;
-				} else if ($key == "team3") {
-					$driveRankSum += 3;
-				} else if ($key == "team4") {
-					$driveRankSum += 4;
-				} else if ($key == "team5") {
-					$driveRankSum += 5;
-				} else if ($key == "team6") {
-					$driveRankSum += 6;
-				}
-			}
-		}
-	}
-	if ($matchCount == 0) {
-		$matchCount = 1;
-	} else {
-		$matchCount = $matchCount;
-	}
-
-	return ($driveRankSum / $matchCount);
-}
-
 
 function matchNum($teamNumber)
 {
