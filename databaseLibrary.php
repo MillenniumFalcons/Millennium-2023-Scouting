@@ -104,7 +104,8 @@ function createTables()
 			chargedBatteries VARCHAR(20) NOT NULL,
 			codeLanguage VARCHAR(10) NOT NULL,
 			pitComments LONGTEXT NOT NULL,
-			climbHelp LONGTEXT NOT NULL
+			climbHelp LONGTEXT NOT NULL,
+			LoctiteFalcons VARCHAR(10) NOT NULL
 		)";
 	$statemennt = $conn->prepare($query);
 	if (!$statemennt->execute()) {
@@ -116,29 +117,27 @@ function createTables()
 			matchNum INT(11) NOT NULL,
 			teamNum INT(11) NOT NULL,
 			allianceColor TEXT NOT NULL,
-			autoPath LONGTEXT NOT NULL,
 			crossLineA INT(11) NOT NULL,
-			upperGoal INT(11) NOT NULL,
-			upperGoalMiss INT(11) NOT NULL,
-			lowerGoal INT(11) NOT NULL,
-			lowerGoalMiss INT(11) NOT NULL,
-			upperGoalT INT(11) NOT NULL,
-			upperGoalMissT INT(11) NOT NULL,
-			lowerGoalT INT(11) NOT NULL,
-			lowerGoalMissT INT(11) NOT NULL,
-			controlPanelPosT TINYINT(4) NOT NULL,
-			controlPanelNumT TINYINT(4) NOT NULL,
-			climb TINYINT(4) NOT NULL,
-			climbTwo TINYINT(4) NOT NULL,
-			climbThree TINYINT(4) NOT NULL,
-			climbCenter TINYINT(4) NOT NULL,
-			climbSide TINYINT(4) NOT NULL,
+			aCubeL INT(11) NOT NULL,
+			aCubeM INT(11) NOT NULL,
+			aCubeH INT(11) NOT NULL,
+			aConeL INT(11) NOT NULL,
+			aConeM INT(11) NOT NULL,
+			aConeH INT(11) NOT NULL,
+			aDocked INT(11) NOT NULL,
+			aEngaged INT(11) NOT NULL,
+			tCubeL INT(11) NOT NULL,
+			tCubeM INT(11) NOT NULL,
+			tCubeH INT(11) NOT NULL,
+			tConeL INT(11) NOT NULL,
+			tConeM INT(11) NOT NULL,
+			tConeH INT(11) NOT NULL,
+			docked INT(11) NOT NULL,
+			engaged INT(11) NOT NULL,
+			parked INT(11) NOT NULL,
 			issues LONGTEXT NOT NULL,
 			defenseBot INT(11) NOT NULL,
-			defenseComments LONGTEXT NOT NULL,
-			matchComments LONGTEXT NOT NULL,
-			penalties INT(11) NOT NULL,
-			cycleNumber INT(11) NOT NULL
+			matchComments LONGTEXT NOT NULL
 		)";
 	$statement = $conn->prepare($query);
 	if (!$statement->execute()) {
@@ -160,25 +159,11 @@ function getTeamList()
 	return ($teams);
 }
 
-function getUpperGoalTeamList()
-{
-	global $matchScoutTable;
-	$queryString = "SELECT `teamNum` FROM `" . $matchScoutTable . "`";
-	$result = runQuery($queryString);
-	$teams = array();
-	foreach ($result as $row_key => $row) {
-		if ((!in_array($row["teamNum"], $teams)) && (getTotalUpperGoal($row["teamNum"]) != 0)) {
-			array_push($teams, $row["teamNum"]);
-		}
-	}
-	return ($teams);
-}
-
-function pitScoutInput($teamNumber, $teamName, $numBatteries, $chargedBatteries, $codeLanguage, $pitComments, $climbHelp)
+function pitScoutInput($teamNumber, $teamName, $numBatteries, $chargedBatteries, $codeLanguage, $pitComments, $climbHelp, $LoctiteFalcons)
 {
 	global $pitScoutTable;
-	$queryString = "REPLACE INTO `" . $pitScoutTable . "` (`teamNumber`, `teamName`, `numBatteries`,`chargedBatteries`, `codeLanguage`, `pitComments`, `climbHelp`)";
-	$queryString = $queryString . ' VALUES ("' . $teamNumber . '", "' . $teamName . '", "' . $numBatteries . '", "' . $chargedBatteries . '", "' . $codeLanguage . '", "' . $pitComments . '", "' . $climbHelp . '")';
+	$queryString = "REPLACE INTO `" . $pitScoutTable . "` (`teamNumber`, `teamName`, `numBatteries`,`chargedBatteries`, `codeLanguage`, `pitComments`, `climbHelp`, `LoctiteFalcons`)";
+	$queryString = $queryString . ' VALUES ("' . $teamNumber . '", "' . $teamName . '", "' . $numBatteries . '", "' . $chargedBatteries . '", "' . $codeLanguage . '", "' . $pitComments . '", "' . $climbHelp . '", "' . $LoctiteFalcons . '")';
 	$queryOutput = runQuery($queryString);
 }
 
@@ -190,27 +175,26 @@ function matchInput(
 	$allianceColor,
 	$autoPath,
 	$crossLineA,
-	$upperGoal,
-	$upperGoalMiss,
-	$lowerGoal,
-	$lowerGoalMiss,
-	$upperGoalT,
-	$upperGoalMissT,
-	$lowerGoalT,
-	$lowerGoalMissT,
-	$controlPanelPosT,
-	$controlPanelNumT,
-	$climb,
-	$climbTwo,
-	$climbThree,
-	$climbCenter,
-	$climbSide,
+	$aCubeL,
+	$aCubeM,
+	$aCubeH,
+	$aConeL,
+	$aConeM,
+	$aConeH,
+	$aDocked,
+	$aEngaged,
+	$tCubeL,
+	$tCubeM,
+	$tCubeH,
+	$tConeL,
+	$tConeM,
+	$tConeH,
+	$docked,
+	$engaged,
+	$parked,
 	$issues,
 	$defenseBot,
-	$defenseComments,
-	$matchComments,
-	$penalties,
-	$cycleNumber
+	$matchComments
 ) {
 
 	global $servername;
@@ -225,27 +209,26 @@ function matchInput(
 															 `allianceColor`,
 															 `autoPath`,
 															 `crossLineA`,
-															 `upperGoal`,
-															 `upperGoalMiss`,
-															 `lowerGoal`,
-															 `lowerGoalMiss`,
-															 `upperGoalT`,
-															 `upperGoalMissT`,
-															 `lowerGoalT`,
-															 `lowerGoalMissT`,
-															 `controlPanelPosT`,
-															 `controlPanelNumT`,
-															 `climb`,
-															 `climbTwo`,
-															 `climbThree`,
-															 `climbCenter`,
-															 `climbSide`,
+															 `aCubeL`,
+															 `aCubeM`,
+															 `aCubeH`,
+															 `aConeL`,
+															 `aConeM`,
+															 `aConeH`,
+															 `aDocked`,
+															 `aEngaged`,
+															 `tCubeL`,
+															 `tCubeM`,
+															 `tCubeH`,
+															 `tConeL`,
+															 `tConeM`,
+															 `tConeH`,
+															 `docked`,
+															 `engaged`,
+															 `parked`,
 															 `issues`,
 															 `defenseBot`,
-															 `defenseComments`,
-															 `matchComments`,
-															 `penalties`,
-															 `cycleNumber`)
+															 `matchComments`)
 													VALUES ( "' . $user . '",
 															 "' . $ID . '",
 															 "' . $matchNum . '",
@@ -253,27 +236,26 @@ function matchInput(
 															 "' . $allianceColor . '",
 															 "' . $autoPath . '",
 															 "' . $crossLineA . '",
-															 "' . $upperGoal . '",
-															 "' . $upperGoalMiss . '",
-															 "' . $lowerGoal . '",
-															 "' . $lowerGoalMiss . '",
-															 "' . $upperGoalT . '",
-															 "' . $upperGoalMissT . '",
-															 "' . $lowerGoalT . '",
-															 "' . $lowerGoalMissT . '",
-															 "' . $controlPanelPosT . '",
-															 "' . $controlPanelNumT . '",
-															 "' . $climb . '",
-															 "' . $climbTwo . '",
-															 "' . $climbThree . '",
-															 "' . $climbCenter . '",
-															 "' . $climbSide . '",
+															 "' . $aCubeL . '",
+															 "' . $aCubeM . '",
+															 "' . $aCubeH . '",
+															 "' . $aConeL . '",
+															 "' . $aConeM . '",
+															 "' . $aConeH . '",
+															 "' . $aDocked . '",
+															 "' . $aEngaged . '",
+															 "' . $tCubeL . '",
+															 "' . $tCubeM . '",
+															 "' . $tCubeH . '",
+															 "' . $tConeL . '",
+															 "' . $tConeM . '",
+															 "' . $tConeH . '",
+															 "' . $docked . '",
+															 "' . $engaged . '",
+															 "' . $parked . '",
 															 "' . $issues . '",
 															 "' . $defenseBot . '",
-															 "' . $defenseComments . '",
-															 "' . $matchComments . '",
-															 "' . $penalties . '",
-															 "' . $cycleNumber . '")';
+															 "' . $matchComments . '")';
 	$queryOutput = runQuery($queryString);
 }
 
@@ -294,25 +276,25 @@ function getTeamData($teamNumber)
 	if ($result != FALSE) {
 		// output data of each row
 		foreach ($result as $row_key => $row) {
-			array_push($teamData, $row["teamNumber"], $row["teamName"], $row["numBatteries"], $row["chargedBatteries"], $row["codeLanguage"], $row["pitComments"], $row["climbHelp"], array(), array());
+			array_push($teamData, $row["teamNumber"], $row["teamName"], $row["numBatteries"], $row["chargedBatteries"], $row["codeLanguage"], $row["pitComments"], $row["climbHelp"], $row["LoctiteFalcons"], array());
 			$pitExists = True;
 		}
 	}
 	if (!$pitExists) {
-		array_push($teamData, $teamNumber, 'NA', 'NA', 'NA', 'NA', 'NA', 'NA', array(), array());
+		array_push($teamData, $teamNumber, 'NA', 'NA', 'NA', 'NA', 'NA', 'NA', 'NA', array());
 	}
 	if ($result2 != FALSE) {
 		foreach ($result2 as $row_key => $row) {
 			array_push($teamData[8], array(
 				$row["user"], $row["ID"], $row["matchNum"],
 				$row["teamNum"], $row["allianceColor"], $row["autoPath"],
-				$row["crossLineA"], $row["upperGoal"], $row["upperGoalMiss"],
-				$row["lowerGoal"], $row["lowerGoalMiss"], $row["upperGoalT"],
-				$row["upperGoalMissT"],  $row["lowerGoalT"], $row["lowerGoalMissT"],
-				$row["controlPanelPosT"], $row["controlPanelNumT"], $row["climb"],
-				$row["climbTwo"], $row["climbThree"], $row["climbCenter"],
-				$row["climbSide"], $row["issues"], $row["defenseBot"],
-				$row["defenseComments"], $row["matchComments"], $row["penalties"], $row["cycleNumber"]
+				$row["crossLineA"], $row["aCubeL"], $row["aCubeM"],
+				$row["aCubeH"], $row["aConeL"], $row["aConeM"],
+				$row["aConeH"],  $row["aDocked"], $row["aEngaged"],
+				$row["tCubeL"], $row["tCubeM"], $row["tCubeH"],
+				$row["tConeL"], $row["tConeM"], $row["tConeH"],
+				$row["docked"], $row["engaged"], $row["parked"],
+				$row["issues"], $row["defenseBot"], $row["matchComments"]
 			));
 		}
 	}

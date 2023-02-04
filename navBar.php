@@ -33,9 +33,7 @@
 				</li>-->
 				<!--<li><a href="userRegistration.php" style="color:Black;">User Registration</a></li>-->
 				<li><a href="teamData.php" style="color:Black;">Team Data</a></li>
-				<li><a href="matchData.php" style="color:Black;">Match Data</a></li>
 				<li><a href="teamRanking.php" style="color:Black;">Ranking</a></li>
-				<li><a href="matchOutput.php" style="color:Black;">Match Output</a></li>
 				<!--   <li><a href="scoreEstimate.php" style="color:Black;">Score Est</a></li>  >-->
 				<!--<li><a href="teamFilter.php" style="color:Black;">Team Filter</a></li>-->
 

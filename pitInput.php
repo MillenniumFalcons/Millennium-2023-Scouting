@@ -16,17 +16,17 @@ function filter($str){
 			 $codeLanguage = filter($_POST['codeLanguage']);
 			 $pitComments = filter($_POST['pitComments']);
 			 $climbHelp = filter($_POST['climbHelp']);
+			 $LoctiteFalcons = filter($_POST['LoctiteFalcons']);
 
 
-
-
-			pitScoutInput( $teamNumber,
+			pitScoutInput($teamNumber,
 						$teamName,
 						$numBatteries,
 						$chargedBatteries,
 						$codeLanguage,
 						$pitComments,
-						$climbHelp);
+						$climbHelp,
+						$LoctiteFalcons);
 			}
  }
  ?>
@@ -95,6 +95,14 @@ function filter($str){
 				</div>
 				<div class="col-lg-10">
 				<input type="text" class="form-control" id="climbHelp" name="climbHelp" placeholder=" ">
+				<br>
+				</div>
+
+				<div class="col-lg-2">
+				<b><br>Loctite Falcons? </b>
+				</div>
+				<div class="col-lg-10">
+				<input type="text" class="form-control" id="LoctiteFalcons" name="LoctiteFalcons" placeholder=" ">
 				<br>
 				</div>
 
