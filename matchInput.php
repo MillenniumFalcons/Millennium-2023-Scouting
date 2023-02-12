@@ -156,7 +156,7 @@ include("navBar.php");
 					aConeM = 0;
 					aConeH = 0;
 					updateMode = true;
-					var increment = 1;
+					increment = 1;
 					aDocked = 0;
 					aEngaged = 0;
 
@@ -276,7 +276,7 @@ include("navBar.php");
 					tConeM = 0;
 					tConeH = 0;
 					updateModeT = true;
-					var incrementT = 1;
+					incrementT = 1;
 
 					function TupdateCubesLow() {
 						tCubeL += incrementT;
@@ -454,7 +454,7 @@ include("navBar.php");
 			-ms-transform: translate(-50%, -50%);
 			background-color: rgb(185, 139, 204);
 			color: white;
-			font-size: 16px;
+			font-size: 20px;
 			padding: 12px 24px;
 			border: Purple;
 			cursor: pointer;
@@ -468,8 +468,8 @@ include("navBar.php");
 
 		.buttonOnPicture .btn2 {
 			position: absolute;
-			top: 50%;
-			left: 55%;
+			top: 48%;
+			left: 58%;
 			transform: translate(-50%, -50%);
 			-ms-transform: translate(-50%, -50%);
 			background-color: rgb(185, 139, 204);
@@ -529,7 +529,7 @@ include("navBar.php");
 
 		.buttonOnPicture .btn5 {
 			position: absolute;
-			top: 50%;
+			top: 45%;
 			left: 55%;
 			transform: translate(-50%, -50%);
 			-ms-transform: translate(-50%, -50%);
