@@ -1,8 +1,8 @@
 <?php include("header.php"); ?>
 <!-- Image and text -->
-<nav class="navbar navbar-expand-lg navbar-dark orange" role="navigation">
+<nav class="navbar navbar-expand-lg navbar-dark red" role="navigation">
 	<a class="navbar-brand" href="#">
-		<img src="images/Logo.png" height="40" class="d-inline-block align-top" alt="">
+		<img src="3647.png" height="40" class="d-inline-block align-top" alt="">
 
 	</a>
 	<div class="container">

@@ -27,9 +27,22 @@
 			<div class="col-lg-12 col-sm-12 col-xs-12">
 				Select images to upload:
 				<input type="file" name="fileToUpload" multiple id="fileToUpload">
-				<input id="PitScouting" type="submit" class="btn btn-primary" value="Submit Data" onclick="" >
+				<input id="PitScouting" type="submit" class="clearColor" value="Submit Data" onclick="" >
 			</form>
 			</div>
 	</div>
 </div>
+<style>
+.clearColor {
+			background-color: rgb(255, 0, 0);
+			color: white;
+			border-radius: 2px;
+			width: 100px;
+     		height: 40px;
+			font-family: Helvetica;
+			font-weight: bold;
+			/*To get rid of weird 3D affect in some browsers*/
+			border: solid rgb(255, 0, 0);
+		}
+</style>
 <?php include("footer.php"); ?>

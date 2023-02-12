@@ -1,5 +1,5 @@
  <!--Footer-->
-    <footer class="page-footer orange">
+    <footer class="page-footer gray">
         <hr>
     <!--Call to action-->
         <div class="call-to-action">

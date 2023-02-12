@@ -173,7 +173,6 @@ function matchInput(
 	$matchNum,
 	$teamNum,
 	$allianceColor,
-	$autoPath,
 	$crossLineA,
 	$aCubeL,
 	$aCubeM,
@@ -207,7 +206,6 @@ function matchInput(
 															 `matchNum`,
 															 `teamNum`,
 															 `allianceColor`,
-															 `autoPath`,
 															 `crossLineA`,
 															 `aCubeL`,
 															 `aCubeM`,
@@ -234,7 +232,6 @@ function matchInput(
 															 "' . $matchNum . '",
 															 "' . $teamNum . '",
 															 "' . $allianceColor . '",
-															 "' . $autoPath . '",
 															 "' . $crossLineA . '",
 															 "' . $aCubeL . '",
 															 "' . $aCubeM . '",
@@ -256,6 +253,7 @@ function matchInput(
 															 "' . $issues . '",
 															 "' . $defenseBot . '",
 															 "' . $matchComments . '")';
+	echo $queryString;
 	$queryOutput = runQuery($queryString);
 }
 
@@ -287,7 +285,7 @@ function getTeamData($teamNumber)
 		foreach ($result2 as $row_key => $row) {
 			array_push($teamData[8], array(
 				$row["user"], $row["ID"], $row["matchNum"],
-				$row["teamNum"], $row["allianceColor"], $row["autoPath"],
+				$row["teamNum"], $row["allianceColor"],
 				$row["crossLineA"], $row["aCubeL"], $row["aCubeM"],
 				$row["aCubeH"], $row["aConeL"], $row["aConeM"],
 				$row["aConeH"],  $row["aDocked"], $row["aEngaged"],

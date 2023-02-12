@@ -10,7 +10,7 @@ include('navBar.php');
     }
 
     .intro-1 {
-        background: url("daffy.png")no-repeat center center;
+        background: url("3647.png")no-repeat center center;
         background-size: cover;
     }
 
@@ -24,11 +24,11 @@ include('navBar.php');
     }
 </style>
 
-<body style="background-color:#008080">
+<body style="background-color:#800000">
     <header>
         <!--Intro Section-->
         <section class="view intro-1 hm-black-strong">
-            <div style="background-color: rgba(0,0,0,.3);" class="full-bg-img flex-center">
+            <div style="background-color: rgba(10,0,0,.3);" class="full-bg-img flex-center">
                 <div class="container">
                     <ul>
                         <li>
@@ -41,37 +41,6 @@ include('navBar.php');
             </div>
         </section>
     </header>
-    <!-- Main container-->
-    <div class="container">
-
-        <div class="divider-new pt-5">
-            <h2 style="color:White;"><b>Quick Links<b></h2>
-        </div>
-
-        <!--Section: Best features-->
-        <section id="best-features">
-
-            <div class="row pt-3">
-
-                <div class="col-lg-3 mb-r">
-                    <a href="matchInput.php" class="btn btn-warning">Match Form</a>
-                </div>
-
-                <div class="col-lg-3 mb-r">
-                    <a href="pitInput.php" class="btn btn-warning">Pit Scout Form</a>
-                </div>
-
-                <div class="col-lg-3 mb-r">
-                    <a href="headScoutInput.php" class="btn btn-warning">Head Scout Form</a>
-                </div>
-
-            </div>
-
-        </section>
-        <!--/Section: Best features-->
-
-    </div>
-    <!--/ Main container-->
     <?php
     include("footer.php");
     ?>
