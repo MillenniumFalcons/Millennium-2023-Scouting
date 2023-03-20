@@ -5,7 +5,6 @@ include("header.php") ?>
 <body>
 	<?php include("navBar.php") ?>
 
-	<div class="container row-offcanvas row-offcanvas-left">
 		<div class="well column  col-lg-12  col-sm-12 col-xs-12" id="content">
 			<h2>Team Ranking</h2>
 			<table class="sortable table table-hover" id="RawData" border="1">
@@ -23,17 +22,17 @@ include("header.php") ?>
 					<th>Max Auto Game Pieces</th>
 					<th>Avg Auto Dock</th>
 					<th>Avg Auto Engage</th>
-					<th bgcolor="Lavender">Avg Teleop Cube Low</th>				
-					<th bgcolor="Lavender">Avg Teleop Cube Mid</th>
-					<th bgcolor="Lavender">Avg Teleop Cube High</th>
-					<th bgcolor="LemonChiffon">Avg Teleop Cone Low</th>
-					<th bgcolor="LemonChiffon">Avg Teleop Cone Mid</th>
-					<th bgcolor="LemonChiffon">Avg Teleop Cone High</th>	
+					<th bgcolor="PaleTurquoise">Avg Teleop Cube Low</th>				
+					<th bgcolor="PaleTurquoise">Avg Teleop Cube Mid</th>
+					<th bgcolor="PaleTurquoise">Avg Teleop Cube High</th>
+					<th bgcolor="LightCoral">Avg Teleop Cone Low</th>
+					<th bgcolor="LightCoral">Avg Teleop Cone Mid</th>
+					<th bgcolor="LightCoral">Avg Teleop Cone High</th>	
 					<th>Avg Teleop Game Pieces</th>
 					<th>Max Teleop Game Pieces</th>
 					<th>Avg Teleop Dock</th>
 					<th>Avg Teleop Engage</th>
-					<th>Total Defense</th>
+					<th bgcolor="PaleGreen">Total Defense</th>
 				</tr>
 				<?php
 				include("databaseLibrary.php");
@@ -101,6 +100,5 @@ include("header.php") ?>
 				?>
 			</table>
 		</div>
-	</div>
 </body>
 <?php include("footer.php") ?>
