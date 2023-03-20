@@ -299,225 +299,9 @@ function getTeamData($teamNumber)
 	return ($teamData);
 }
 
-function getAutoUpperGoal($teamNumber)
-{
-	$teamData = getTeamData($teamNumber);
-	$matchN = matchNum($teamNumber);
-	$cubeGraphT = array();
-	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-		$cubeGraphT[$teamData[8][$i][2]] = $teamData[8][$i][7];
-	}
-	$out = array();
-	for ($i = 0; $i != sizeof($matchN); $i++) {
-		array_push($out, $cubeGraphT[$matchN[$i]]);
-	}
-	return ($out);
-}
-
-function getAutoLowerGoal($teamNumber)
-{
-	$teamData = getTeamData($teamNumber);
-	$matchN = matchNum($teamNumber);
-	$cubeGraphT = array();
-	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-		$cubeGraphT[$teamData[8][$i][2]] = $teamData[8][$i][9];
-	}
-	$out = array();
-	for ($i = 0; $i != sizeof($matchN); $i++) {
-		array_push($out, $cubeGraphT[$matchN[$i]]);
-	}
-	return ($out);
-}
-
-function getAutoUpperGoalMiss($teamNumber)
-{
-	$teamData = getTeamData($teamNumber);
-	$matchN = matchNum($teamNumber);
-	$cubeGraphT = array();
-	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-		$cubeGraphT[$teamData[8][$i][2]] = $teamData[8][$i][8];
-	}
-	$out = array();
-	for ($i = 0; $i != sizeof($matchN); $i++) {
-		array_push($out, $cubeGraphT[$matchN[$i]]);
-	}
-	return ($out);
-}
-
-function getAutoLowerGoalMiss($teamNumber)
-{
-	$teamData = getTeamData($teamNumber);
-	$matchN = matchNum($teamNumber);
-	$cubeGraphT = array();
-	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-		$cubeGraphT[$teamData[8][$i][2]] = $teamData[8][$i][10];
-	}
-	$out = array();
-	for ($i = 0; $i != sizeof($matchN); $i++) {
-		array_push($out, $cubeGraphT[$matchN[$i]]);
-	}
-	return ($out);
-}
-
-function getTeleopUpperGoal($teamNumber)
-{
-	$teamData = getTeamData($teamNumber);
-	$matchN = matchNum($teamNumber);
-	$cubeGraphT = array();
-	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-		$cubeGraphT[$teamData[8][$i][2]] = $teamData[8][$i][11];
-	}
-	$out = array();
-	for ($i = 0; $i != sizeof($matchN); $i++) {
-		array_push($out, $cubeGraphT[$matchN[$i]]);
-	}
-	return ($out);
-}
-
-function getTeleopLowerGoal($teamNumber)
-{
-	$teamData = getTeamData($teamNumber);
-	$matchN = matchNum($teamNumber);
-	$cubeGraphT = array();
-	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-		$cubeGraphT[$teamData[8][$i][2]] = $teamData[8][$i][13];
-	}
-	$out = array();
-	for ($i = 0; $i != sizeof($matchN); $i++) {
-		array_push($out, $cubeGraphT[$matchN[$i]]);
-	}
-	return ($out);
-}
-
-function getTeleopUpperGoalMiss($teamNumber)
-{
-	$teamData = getTeamData($teamNumber);
-	$matchN = matchNum($teamNumber);
-	$cubeGraphT = array();
-	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-		$cubeGraphT[$teamData[8][$i][2]] = $teamData[8][$i][12];
-	}
-	$out = array();
-	for ($i = 0; $i != sizeof($matchN); $i++) {
-		array_push($out, $cubeGraphT[$matchN[$i]]);
-	}
-	return ($out);
-}
-
-function getTeleopLowerGoalMiss($teamNumber)
-{
-	$teamData = getTeamData($teamNumber);
-	$matchN = matchNum($teamNumber);
-	$cubeGraphT = array();
-	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-		$cubeGraphT[$teamData[8][$i][2]] = $teamData[8][$i][14];
-	}
-	$out = array();
-	for ($i = 0; $i != sizeof($matchN); $i++) {
-		array_push($out, $cubeGraphT[$matchN[$i]]);
-	}
-	return ($out);
-}
-
-function getClimb($teamNumber)
-{
-	$teamData = getTeamData($teamNumber);
-	$matchN = matchNum($teamNumber);
-	$cubeGraphT = array();
-	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-		$cubeGraphT[$teamData[8][$i][2]] = $teamData[8][$i][17] + $teamData[8][$i][18] + $teamData[8][$i][19];
-	}
-	$out = array();
-	for ($i = 0; $i != sizeof($matchN); $i++) {
-		array_push($out, $cubeGraphT[$matchN[$i]]);
-	}
-	return ($out);
-}
-
-function getUpperShotPercentage($teamNumber)
-{
-	$teamData = getTeamData($teamNumber);
-	$matchN = matchNum($teamNumber);
-	$cubeGraphT = array();
-	$x = 0;
-	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-		$cubeGraphT[$teamData[8][$i][2]] = (100 * ((($teamData[8][$i][11]) + ($teamData[8][$i][7])) / (($teamData[8][$i][12]) + (($teamData[8][$i][11]) + ($teamData[8][$i][7]) + ($teamData[8][$i][8])))));
-	}
-	$out = array();
-	for ($i = 0; $i != sizeof($matchN); $i++) {
-		array_push($out, $cubeGraphT[$matchN[$i]]);
-	}
-	return ($out);
-}
-
-function getLowerShotPercentage($teamNumber)
-{
-	$teamData = getTeamData($teamNumber);
-	$matchN = matchNum($teamNumber);
-	$cubeGraphT = array();
-	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-		$cubeGraphT[$teamData[8][$i][2]] = (100 * (($teamData[8][$i][9]) + ($teamData[8][$i][13])) / (($teamData[8][$i][9]) + ($teamData[8][$i][10]) + ($teamData[8][$i][14]) + ($teamData[8][$i][13])));
-	}
-	$out = array();
-	for ($i = 0; $i != sizeof($matchN); $i++) {
-		array_push($out, $cubeGraphT[$matchN[$i]]);
-	}
-	return ($out);
-}
-
-
-function getTeleopLowerShotPercentage($teamNumber)
-{
-	$teamData = getTeamData($teamNumber);
-	$matchN = matchNum($teamNumber);
-	$cubeGraphT = array();
-	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-		$cubeGraphT[$teamData[8][$i][2]] = ($teamData[8][$i][13]) / ($teamData[8][$i][14]);
-	}
-	$out = array();
-	for ($i = 0; $i != sizeof($matchN); $i++) {
-		array_push($out, $cubeGraphT[$matchN[$i]]);
-	}
-	return ($out);
-}
-
-
-function getAutoUpperShotPercentage($teamNumber)
-{
-	$teamData = getTeamData($teamNumber);
-	$matchN = matchNum($teamNumber);
-	$cubeGraphT = array();
-	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-		$cubeGraphT[$teamData[8][$i][2]] = ($teamData[8][$i][7]) / ($teamData[8][$i][8]);
-	}
-	$out = array();
-	for ($i = 0; $i != sizeof($matchN); $i++) {
-		array_push($out, $cubeGraphT[$matchN[$i]]);
-	}
-	return ($out);
-}
-
-function getAutoLowerShotPercentage($teamNumber)
-{
-	$teamData = getTeamData($teamNumber);
-	$matchN = matchNum($teamNumber);
-	$cubeGraphT = array();
-	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-		$cubeGraphT[$teamData[8][$i][2]] = ($teamData[8][$i][9]) / ($teamData[8][$i][10]);
-	}
-	$out = array();
-	for ($i = 0; $i != sizeof($matchN); $i++) {
-		array_push($out, $cubeGraphT[$matchN[$i]]);
-	}
-	return ($out);
-}
-
-
-
-
-
 //TEAM RANKING STATISTICS
 
+// ------------------------- AUTO ------------------------------
 function getAvgGamePieceCount($teamNumber)
 {
 	$teamData = getTeamData($teamNumber);
@@ -666,7 +450,7 @@ function getAvgAutoEngage($teamNumber)
 	return (round(($engage / $matchCount), 3));
 }
 
-//TELEOP
+//------------------------------ TELEOP -------------------------------
 
 function getAvgTeleopConeHigh($teamNumber)
 {
@@ -791,7 +575,20 @@ function getAvgTeleopEngage($teamNumber)
 	return (round(($engage / $matchCount), 3));
 }
 
-//Defense
+function getAvgTeleopPark($teamNumber)
+{
+	$teamData = getTeamData($teamNumber);
+	$park = 0;
+	$matchCount  = 0;
+
+	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
+		$park = $park + $teamData[8][$i][22];
+		$matchCount++;
+	}
+	return (round(($park / $matchCount), 3));
+}
+
+//----------------------------- Defense -------------------------------
 
 function getTotalDefense($teamNumber)
 {
@@ -803,193 +600,30 @@ function getTotalDefense($teamNumber)
 	return ($defenseCount);
 }
 
+// --------------------------- TEAM DATA GRAPH -----------------------------------
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function getAvgLowerGoalT($teamNumber)
-{
-	$teamData = getTeamData($teamNumber);
-	$lowerGoalCountT = 0;
-	$matchCount  = 0;
-	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-		$lowerGoalCountT = $lowerGoalCountT + $teamData[8][$i][13];
-		$matchCount++;
-	}
-	return ($lowerGoalCountT / $matchCount);
-}
-
-function getAvgLowerGoalMissT($teamNumber)
-{
-	$teamData = getTeamData($teamNumber);
-	$lowerGoalMissCountT = 0;
-	$matchCount  = 0;
-	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-		$lowerGoalMissCountT = $lowerGoalMissCountT + $teamData[8][$i][14];
-		$matchCount++;
-	}
-	return ($lowerGoalMissCountT / $matchCount);
-}
-function getAvgUpperGoalMissT($teamNumber)
-{
-	$teamData = getTeamData($teamNumber);
-	$upperGoalMissCountT = 0;
-	$matchCount  = 0;
-
-	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-		$upperGoalMissCountT = $upperGoalMissCountT + $teamData[8][$i][12];
-		$matchCount++;
-	}
-	return (round(($upperGoalMissCountT / $matchCount), 3));
-}
-
-
-
-//Auto Upper and Lower statistics
-
-
-
-function getAvgUpperGoal($teamNumber)
-{
-	$teamData = getTeamData($teamNumber);
-	$upperGoalCount = 0;
-	$matchCount  = 0;
-	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-		$upperGoalCount = $upperGoalCount + $teamData[8][$i][7];
-		$matchCount++;
-	}
-	return (round(($upperGoalCount / $matchCount), 3));
-}
-
-function getAvgLowerGoal($teamNumber)
-{
-	$teamData = getTeamData($teamNumber);
-	$lowerGoalCount = 0;
-	$matchCount  = 0;
-	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-		$lowerGoalCount = $lowerGoalCount + $teamData[8][$i][9];
-		$matchCount++;
-	}
-	return ($lowerGoalCount / $matchCount);
-}
-
-
-
-//Teleop
-
-
-
-
-function getMaxLowerGoalT($teamNumber)
-{
-	$teamData = getTeamData($teamNumber);
-	$maxLowerGoalT = 0;
-	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-		if ($maxLowerGoalT < $teamData[8][$i][13]) {
-			$maxLowerGoalT = $teamData[8][$i][13];
-		}
-	}
-	return ($maxLowerGoalT);
-}
-
-//Auto
-
-
-function getMaxUpperGoal($teamNumber)
-{
-	$teamData = getTeamData($teamNumber);
-	$maxUpperGoal = 0;
-	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-		if ($maxUpperGoal < $teamData[8][$i][7]) {
-			$maxUpperGoal = $teamData[8][$i][7];
-		}
-	}
-	return ($maxUpperGoal);
-}
-
-function getMaxLowerGoal($teamNumber)
-{
-	$teamData = getTeamData($teamNumber);
-	$maxLowerGoal = 0;
-	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-		if ($maxLowerGoal < $teamData[8][$i][9]) {
-			$maxLowerGoal = $teamData[8][$i][9];
-		}
-	}
-	return ($maxLowerGoal);
-}
-
-function getAvgClimb($teamNumber)
-{
-	$teamData = getTeamData($teamNumber);
-	$climbSum = 0;
-	$matchCount = 0;
-
-	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-		$climbSum += $teamData[8][$i][20];
-		$climbSum += $teamData[8][$i][21];
-		$matchCount++;
-	}
-
-	return ($climbSum / $matchCount);
-}
-
-function getAllMatchData()
-{
-	global $matchScoutTable;
-	$qs1 = "SELECT * FROM `" . $matchScoutTable . "`";
-	return runQuery($qs1);
-}
-
-function getTotalClimb($teamNumber)
-{
-	$teamData = getTeamData($teamNumber);
-	$climbCount = 0;
-	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-		$climbCount = $climbCount + $teamData[8][$i][17];
-		$climbCount = $climbCount + $teamData[8][$i][18];
-		$climbCount = $climbCount + $teamData[8][$i][19];
-	}
-	return ($climbCount);
-}
-
-function getTotalUpperGoal($teamNumber)
-{
-	$teamData = getTeamData($teamNumber);
-	$upperGoal = 0;
-	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-		$upperGoal = $upperGoal + $teamData[8][$i][7];
-		$upperGoal = $upperGoal + $teamData[8][$i][11];
-	}
-	return ($upperGoal);
-}
-
-
-function getTotalLowerGoal($teamNumber)
+function getAutoCones($teamNumber)
 {
 	$teamData = getTeamData($teamNumber);
 	$matchN = matchNum($teamNumber);
 	$cubeGraphT = array();
 	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-		$cubeGraphT[$teamData[8][$i][2]] = $teamData[8][$i][9] + $teamData[8][$i][13];
+		$cubeGraphT[$teamData[8][$i][2]] = $teamData[8][$i][9] + $teamData[8][$i][10] + $teamData[8][$i][11];
+	}
+	$out = array();
+	for ($i = 0; $i != sizeof($matchN); $i++) {
+		array_push($out, $cubeGraphT[$matchN[$i]]);
+	}
+	return ($out);
+}
+
+function getAutoCubes($teamNumber)
+{
+	$teamData = getTeamData($teamNumber);
+	$matchN = matchNum($teamNumber);
+	$cubeGraphT = array();
+	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
+		$cubeGraphT[$teamData[8][$i][2]] = $teamData[8][$i][6] + $teamData[8][$i][7] + $teamData[8][$i][8];
 	}
 	$out = array();
 	for ($i = 0; $i != sizeof($matchN); $i++) {
@@ -999,55 +633,62 @@ function getTotalLowerGoal($teamNumber)
 }
 
 
-function getTotalSingleClimb($teamNumber)
+function getTeleopCones($teamNumber)
 {
 	$teamData = getTeamData($teamNumber);
-	$climbCount = 0;
+	$matchN = matchNum($teamNumber);
+	$cubeGraphT = array();
 	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-		$climbCount = $climbCount + $teamData[8][$i][17];
+		$cubeGraphT[$teamData[8][$i][2]] = $teamData[8][$i][17] + $teamData[8][$i][18] + $teamData[8][$i][19];
 	}
-	return ($climbCount);
+	$out = array();
+	for ($i = 0; $i != sizeof($matchN); $i++) {
+		array_push($out, $cubeGraphT[$matchN[$i]]);
+	}
+	return ($out);
 }
 
-function getTotalDoubleClimb($teamNumber)
+function getTeleopCubes($teamNumber)
 {
 	$teamData = getTeamData($teamNumber);
-	$climbCount = 0;
+	$matchN = matchNum($teamNumber);
+	$cubeGraphT = array();
 	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-		$climbCount = $climbCount + $teamData[8][$i][18];
+		$cubeGraphT[$teamData[8][$i][2]] = $teamData[8][$i][14] + $teamData[8][$i][15] + $teamData[8][$i][16];
 	}
-	return ($climbCount);
+	$out = array();
+	for ($i = 0; $i != sizeof($matchN); $i++) {
+		array_push($out, $cubeGraphT[$matchN[$i]]);
+	}
+	return ($out);
 }
 
-function getTotalTripleClimb($teamNumber)
+
+function getDefense($teamNumber)
 {
 	$teamData = getTeamData($teamNumber);
-	$climbCount = 0;
+	$matchN = matchNum($teamNumber);
+	$cubeGraphT = array();
 	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-		$climbCount = $climbCount + $teamData[8][$i][19];
+		$cubeGraphT[$teamData[8][$i][2]] = $teamData[8][$i][24];
 	}
-	return ($climbCount);
+	$out = array();
+	for ($i = 0; $i != sizeof($matchN); $i++) {
+		array_push($out, $cubeGraphT[$matchN[$i]]);
+	}
+	return ($out);
 }
 
-function getTotalClimbSide($teamNumber)
+// --------------------------- OTHER FUNCTIONS -------------------------------
+
+
+function getAllMatchData()
 {
-	$teamData = getTeamData($teamNumber);
-	$climbCount = 0;
-	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-		$climbCount = $climbCount + $teamData[8][$i][21];
-	}
-	return ($climbCount);
+	global $matchScoutTable;
+	$qs1 = "SELECT * FROM `" . $matchScoutTable . "`";
+	return runQuery($qs1);
 }
 
-function getTotalClimbCenter($teamNumber)
-{
-	$teamData = getTeamData($teamNumber);
-	$climbCount = 0;
-	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-		$climbCount = $climbCount + $teamData[8][$i][20];
-	}
-	return ($climbCount);
-}
 
 function matchNum($teamNumber)
 {
@@ -1060,46 +701,25 @@ function matchNum($teamNumber)
 	return ($matchNum);
 }
 
-function defenseComments($teamNumber)
-{
-	$teamData = getTeamData($teamNumber);
-	$defenseComments = array();
-	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-		array_push($defenseComments, $teamData[8][$i][24]);
-	}
-	return ($defenseComments);
-}
-
 function matchComments($teamNumber)
 {
 	$teamData = getTeamData($teamNumber);
 	$matchComments = array();
 	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-		array_push($matchComments, $teamData[8][$i][25]);
+		array_push($matchComments, "Match " . $teamData[8][$i][2] . ": " . $teamData[8][$i][25]);
 	}
 	return ($matchComments);
 }
 
-
-function getScore($teamNumber)
+function getIssues($teamNumber)
 {
 	$teamData = getTeamData($teamNumber);
-	$matchN = matchNum($teamNumber);
-	$cubeGraphT = array();
+	$matchComments = array();
 	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-		$cubeGraphT[$teamData[8][$i][2]] = ((4 * ($teamData[8][$i][7])) + (2 * ($teamData[8][$i][9])) + (2 * ($teamData[8][$i][11])) + ($teamData[8][$i][13]) + (25 * ($teamData[8][$i][20])) + (25 * ($teamData[8][$i][21])) + (20 * ($teamData[8][$i][15])) + (10 * ($teamData[8][$i][16])) + (5 * ($teamData[8][$i][6])));
+		array_push($matchComments, "Match " . $teamData[8][$i][2] . ": " . $teamData[8][$i][23]);
 	}
-	$out = array();
-	for ($i = 0; $i != sizeof($matchN); $i++) {
-		array_push($out, $cubeGraphT[$matchN[$i]]);
-	}
-	return ($out);
+	return ($matchComments);
 }
-
-
-
-
-
 
 
 function getPickList($teamNumber)
@@ -1124,65 +744,4 @@ function getPickList($teamNumber)
 		$matchCount++;
 	}
 	return (round(($pointCal / $matchCount), 3));
-}
-
-
-function getAvgPenalties($teamNumber)
-{
-	$teamData = getTeamData($teamNumber);
-	$penalCount = 0;
-	$matchCount  = 0;
-	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-		$penalCount = $penalCount + $teamData[8][$i][26];
-		$matchCount++;
-	}
-	return ($penalCount / $matchCount);
-}
-
-function getTotalControlNumber($teamNumber)
-{
-	$teamData = getTeamData($teamNumber);
-	$numberCount = 0;
-	$matchCount  = 0;
-	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-		$numberCount = $numberCount + $teamData[8][$i][16];
-		$matchCount++;
-	}
-	return ($numberCount);
-}
-
-function getTotalControlPosition($teamNumber)
-{
-	$teamData = getTeamData($teamNumber);
-	$positionCount = 0;
-	$matchCount  = 0;
-	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-		$positionCount = $positionCount + $teamData[8][$i][15];
-		$matchCount++;
-	}
-	return ($positionCount);
-}
-
-function getAvgCycleCount($teamNumber)
-{
-	$teamData = getTeamData($teamNumber);
-	$cycleCount = 0;
-	$matchCount  = 0;
-	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-		$cycleCount = $cycleCount + $teamData[8][$i][27];
-		$matchCount++;
-	}
-	return ($cycleCount / $matchCount);
-}
-
-function getAvgscore($teamNumber)
-{
-	$teamData = getTeamData($teamNumber);
-	$matchCount  = 0;
-	$Score = 0;
-	for ($i = 0; $i != sizeof($teamData[8]); $i++) {
-		$Score = $Score + ((4 * ($teamData[8][$i][7])) + (2 * ($teamData[8][$i][9])) + (2 * ($teamData[8][$i][11])) + ($teamData[8][$i][13]) + (25 * ($teamData[8][$i][20])) + (25 * ($teamData[8][$i][21])) + (20 * ($teamData[8][$i][15])) + (10 * ($teamData[8][$i][16])) + (5 * ($teamData[8][$i][6])));
-		$matchCount++;
-	}
-	return ($Score / $matchCount);
 }
