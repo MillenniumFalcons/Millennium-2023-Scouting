@@ -11,52 +11,59 @@ include("header.php") ?>
 			<table class="sortable table table-hover" id="RawData" border="1">
 				<tr>
 					<th>Team Number</th>
-					<th>Weighted Score</th>
-					<th>Avg Upper Shot Percentage</th>
-					<th>Avg Lower Shot Percentage</th>
-					<th>Avg Drive Rank</th>
-					<th>Avg Teleop Upper Goal</th>
-					<th>Avg Teleop Lower Goal</th>
-					<th>Avg Teleop Upper Goal Miss</th>
-					<th>Avg Teleop Lower Goal Miss</th>
-					<th>Avg Auto Upper Goal</th>
-					<th>Avg Auto Lower Goal</th>
-					<th>Avg Predicted Score</th>
-					<th>Max Teleop Upper Goal</th>
-					<th>Max Teleop Lower Goal</th>
-					<th>Max Auto Upper Goal</th>
-					<th>Max Auto Lower Goal</th>
-					<th>Avg Climb</th>
-					<th>Total Center Climb</th>
-					<th>Total Side Climb</th>
+					<th>Avg Game Pieces</th>
+					<th>Max Game Pieces</th>
+					<th bgcolor="MediumPurple">Avg Auto Cube Low</th>				
+					<th bgcolor="MediumPurple">Avg Auto Cube Mid</th>
+					<th bgcolor="MediumPurple">Avg Auto Cube High</th>
+					<th bgcolor="yellow">Avg Auto Cone Low</th>
+					<th bgcolor="yellow">Avg Auto Cone Mid</th>
+					<th bgcolor="yellow">Avg Auto Cone High</th>	
+					<th>Avg Auto Game Pieces</th>
+					<th>Max Auto Game Pieces</th>
+					<th>Avg Auto Dock</th>
+					<th>Avg Auto Engage</th>
+					<th bgcolor="Lavender">Avg Teleop Cube Low</th>				
+					<th bgcolor="Lavender">Avg Teleop Cube Mid</th>
+					<th bgcolor="Lavender">Avg Teleop Cube High</th>
+					<th bgcolor="LemonChiffon">Avg Teleop Cone Low</th>
+					<th bgcolor="LemonChiffon">Avg Teleop Cone Mid</th>
+					<th bgcolor="LemonChiffon">Avg Teleop Cone High</th>	
+					<th>Avg Teleop Game Pieces</th>
+					<th>Max Teleop Game Pieces</th>
+					<th>Avg Teleop Dock</th>
+					<th>Avg Teleop Engage</th>
 					<th>Total Defense</th>
 				</tr>
 				<?php
 				include("databaseLibrary.php");
 				$teamList = getTeamList();
-				//$TeamDat = array();
 
 				foreach ($teamList as $teamNumber) {
 
 					$i = 0;
-					$picklist = (getPickList($teamNumber) - getAvgDriveRank($teamNumber));
-					$UpperShotPercentage = getAvgUpperShotPercentage($teamNumber);
-					$LowerShotPercentage = getAvgLowerShotPercentage($teamNumber);
-					$avgDriveRank = getAvgDriveRank($teamNumber);
-					$avgTeleopUpper = getAvgUpperGoalT($teamNumber);
-					$avgTeleopLower = getAvgLowerGoalT($teamNumber);
-					$avgTeleopUpperMiss = getAvgUpperGoalMissT($teamNumber);
-					$avgTeleopLowerMiss = getAvgLowerGoalMissT($teamNumber);
-					$avgAutoUpper = getAvgUpperGoal($teamNumber);
-					$avgAutoLower = getAvgLowerGoal($teamNumber);
-					$avgPredictedScore = getAvgScore($teamNumber);
-					$maxTeleopUpper = getMaxUpperGoalT($teamNumber);
-					$maxTeleopLower = getMaxLowerGoalT($teamNumber);
-					$maxAutoUpper = getMaxUpperGoal($teamNumber);
-					$maxAutoLower = getMaxLowerGoal($teamNumber);
-					$avgClimb = getAvgClimb($teamNumber);
-					$centerClimb = getTotalClimbCenter($teamNumber);
-					$sideClimb = getTotalClimbSide($teamNumber);
+					$GamePieceAvg = getAvgGamePieceCount($teamNumber);
+					$GamePieceMax = getMaxGamePieces($teamNumber);
+					$autoCubeHigh = getAvgAutoCubeHigh($teamNumber);
+					$autoCubeMid = getAvgAutoCubeMid($teamNumber);
+					$autoCubeLow = getAvgAutoCubeLow($teamNumber);
+					$autoConeHigh = getAvgAutoConeHigh($teamNumber);
+					$autoConeMid = getAvgAutoConeMid($teamNumber);
+					$autoConelow = getAvgAutoConeLow($teamNumber);
+					$autoGamePieceAvg = getAvgAutoGamePieceCount($teamNumber);
+					$autoGamePieceMax = getMaxAutoGamePieces($teamNumber);
+					$autoDock = getAvgAutoDock($teamNumber);
+					$autoEngage = getAvgAutoEngage($teamNumber);
+					$teleopCubeHigh = getAvgTeleopCubeHigh($teamNumber);
+					$teleopCubeMid = getAvgTeleopCubeMid($teamNumber);
+					$teleopCubeLow = getAvgTeleopCubeLow($teamNumber);
+					$teleopConeHigh = getAvgTeleopConeHigh($teamNumber);
+					$teleopConeMid = getAvgTeleopConeMid($teamNumber);
+					$teleopConelow = getAvgTeleopConeLow($teamNumber);
+					$teleopGamePieceAvg = getAvgTeleopGamePieceCount($teamNumber);
+					$teleopGamePieceMax = getMaxTeleopGamePieces($teamNumber);
+					$teleopDock = getAvgTeleopDock($teamNumber);
+					$teleopEngage = getAvgTeleopEngage($teamNumber);
 					$totalDefense = getTotalDefense($teamNumber);
 
 
@@ -64,24 +71,28 @@ include("header.php") ?>
 
 					echo ("<tr>
 					<td><a href='teamData.php?team=" . $teamNumber . "'>" . $teamNumber . "</a></td>
-					<th>" . $picklist . "</th>
-					<th>" . $UpperShotPercentage . "</th>
-					<th>" . $LowerShotPercentage . "</th>
-					<th>" . $avgDriveRank . "</th>
-					<th>" . $avgTeleopUpper . "</th>
-					<th>" . $avgTeleopLower . "</th>
-					<th>" . $avgTeleopUpperMiss . "</th>
-					<th>" . $avgTeleopLowerMiss . "</th>
-					<th>" . $avgAutoUpper . "</th>
-					<th>" . $avgAutoLower . "</th>
-					<th>" . $avgPredictedScore . "</th>
-					<th>" . $maxTeleopUpper . "</th>
-					<th>" . $maxTeleopLower . "</th>
-					<th>" . $maxAutoUpper . "</th>
-					<th>" . $maxAutoLower . "</th>
-					<th>" . $avgClimb . "</th>
-					<th>" . $centerClimb . "</th>
-					<th>" . $sideClimb . "</th>
+					<th>" . $GamePieceAvg . "</th>
+					<th>" . $GamePieceMax . "</th>
+					<th>" . $autoCubeLow . "</th>
+					<th>" . $autoCubeMid . "</th>
+					<th>" . $autoCubeHigh . "</th>
+					<th>" . $autoConelow . "</th>
+					<th>" . $autoConeMid . "</th>
+					<th>" . $autoConeHigh . "</th>
+					<th>" . $autoGamePieceAvg . "</th>
+					<th>" . $autoGamePieceMax . "</th>
+					<th>" . $autoDock . "</th>
+					<th>" . $autoEngage . "</th>
+					<th>" . $teleopCubeLow . "</th>
+					<th>" . $teleopCubeMid . "</th>
+					<th>" . $teleopCubeHigh . "</th>
+					<th>" . $teleopConelow . "</th>
+					<th>" . $teleopConeMid . "</th>
+					<th>" . $teleopConeHigh . "</th>
+					<th>" . $teleopGamePieceAvg . "</th>
+					<th>" . $teleopGamePieceMax . "</th>
+					<th>" . $teleopDock . "</th>
+					<th>" . $teleopEngage . "</th>
 					<th>" . $totalDefense . "</th>
 
 					</tr>");
